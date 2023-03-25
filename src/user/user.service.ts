@@ -4,10 +4,12 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { Post } from 'src/post/entities/post.entity';
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(Post) private postRepository: Repository<Post>,
   ) {}
   async create(createUserDto: CreateUserDto) {
     return this.userRepository.save(createUserDto);
@@ -15,6 +17,10 @@ export class UserService {
 
   findAll(): Promise<any> {
     return this.userRepository.find({ relations: ['posts'] });
+  }
+
+  findPostsAll() {
+    return this.postRepository.find();
   }
 
   findOne(id: number) {

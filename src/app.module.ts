@@ -12,7 +12,7 @@ import { PostModule } from './post/post.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '12345',
+      password: '1234556',
       database: 'userpost',
       autoLoadEntities: true,
       synchronize: true,
