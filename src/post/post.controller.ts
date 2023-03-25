@@ -16,6 +16,10 @@ export class PostController {
   findAll() {
     return this.postService.findAll();
   }
+  @Get('users')
+  findUserAll() {
+    return this.postService.findUserAll();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

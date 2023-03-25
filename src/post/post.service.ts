@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entities/user.entity';
+import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -10,6 +11,7 @@ import { Post } from './entities/post.entity';
 export class PostService {
   constructor(
     @InjectRepository(Post) private postRepository: Repository<Post>,
+    private userService: UserService,
   ) {}
   async create(createPostDto: CreatePostDto) {
     const { title, content, category, author } = createPostDto;
@@ -35,5 +37,9 @@ export class PostService {
 
   remove(id: number) {
     return `This action removes a #${id} post`;
+  }
+
+  findUserAll() {
+    return this.userService.findAll();
   }
 }
